@@ -1,35 +1,34 @@
 'use strict';
 
-let allWeather = [];
+// {
+//   "time": 1567792089082,
+//   "summary": "Foggy in the morning."
+// },
+const weatherStuff = [];
 
-function Weather(dataObj){
-  this.time = new Date(dataObj.time).toUTCString();
-  this.forecast = dataObj.summary;
-  allWeather.push(this);
+function Weather(obj){
+  this.time = new Date(obj.time);
+  this.forecast = obj.summary;
+
+  weatherStuff.push(this);
 }
 
-Weather.prototype.dailyWeather = function(){
-  let template = Handlebars.compile($('#weather-results-template').html());
+Weather.prototype.render = function(){
+  let source = $('#weather-results-template').html();
+  let template = Handlebars.compile(source);
   return template(this);
 }
 
-$(function(){
-  $.get('./city-weather-data.json', data => {
-    console.log(data);
-    data.data.forEach(day => {
-      new Weather(day);
-    })
-
-    allWeather.forEach(instance => {
-      $('#weather-container').append(instance.dailyWeather());
-    })
+$.get('city-weather-data.json', weather => {
+  // console.log(data);
+  weather.data.forEach(day => {
+    // console.log(day);
+    $('#weather-container').append(new Weather(day).render());
   })
 })
 
 
 
-// handlebars wants: time and forecast
-// time: sat 12th at 10pm
-// forecast: partly sunny
-
+  // render using handlebars
+  // append to the page
 
