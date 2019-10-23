@@ -16,15 +16,28 @@ app.get('/location', handleLocation);
 app.get('/weather', handleWeather);
 
 // functions
+let locations = {};
+
 function handleLocation(request, response) {
     const location = request.query.data;
-
     const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${location}&key=${process.env.GEOCODE_API_KEY}`;
 
+    // first we check to see if the location is in the location cache
+    // if it is, we send that location
+    // if it isn't, we get the information from the API
+  if( locations[url] ){
+    console.log('using cache');
+    response.send(locations[url]);
+  } else {
+    console.log('getting data from api');
     superagent.get(url)
       .then(resultsFromSuperagent => {
         // console.log(resultsFromSuperagent.body.results[0].geometry);
         const locationObj = new Location(location, resultsFromSuperagent.body.results[0]);
+
+        // store location in the in-memory location object cache
+        locations[url] = locationObj;
+
         response.status(200).send(locationObj);
       })
       .catch ((error) => {
@@ -32,6 +45,7 @@ function handleLocation(request, response) {
         response.status(500).send('we messed up. sorry.');
       })
 
+  }
 }
 
 function Location(city, geoData){
@@ -42,14 +56,14 @@ function Location(city, geoData){
 }
 
 function handleWeather(request, response){
-  console.log('the thing the front sent us', request.query.data);
+  // console.log('the thing the front sent us', request.query.data);
   const locationObject = request.query.data;
 
   const url = `https://api.darksky.net/forecast/${process.env.WEATHER_API_KEY}/${locationObject.latitude},${locationObject.longitude}`;
 
   superagent.get(url)
     .then(resultsFromSuperagent => {
-      console.log(resultsFromSuperagent.body);
+      // console.log(resultsFromSuperagent.body);
 
       const weeklyWeather = resultsFromSuperagent.body.daily.data.map(day => {
         return new Weather(day);
