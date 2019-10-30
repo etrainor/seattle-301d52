@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../partials/head') %>
+<body>
+  <%- include('../partials/header') %>
+
+  <% tasks.forEach(thingToDo => { %>
+    <section>
+      <p>Title: <%= thingToDo.title %></p>
+      <p>Description: <%= thingToDo.description %></p>
+      <p>Status: <%= thingToDo.status %></p>
+      <a href="/tasks/<%= thingToDo.id %>">View Details</a>
+    </section>
+  <% }) %>
+</body>
+</html>
