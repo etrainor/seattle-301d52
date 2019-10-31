@@ -86,8 +86,29 @@ function getBook(request, response){
 }
 
 function createBook(request, response){
+  console.log(request.body);
+
+  let {author, title, description, bookshelf} = request.body;
+  
+
+  let sql = 'INSERT INTO books (title, author, description, bookshelf) VALUES ($1, $2, $3, $4) RETURNING ID;';
+  let safeValues = [title, author, description, bookshelf];
+
+  client.query(sql, safeValues)
+    .then(results => {
+      const id = results.rows[0].id;
+      // let sql = 'SELECT * FROM books WHERE id=$1;';
+      // let safeValues = [id];
+
+      // client.query(sql, safeValues)
+      //   .then(results => {
+      //     let bookIWant = results.rows[0];
+      //     response.render('pages/books/details', {book: bookIWant});
+      // })
+      response.redirect(`/books/${id}`)
+    })
   // send a book to the database
-  // redirect to the homepage
+  // redirect to the detail page
 }
 
 function handleError(err, response){
