@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('../layout/head') %>
+  </head>
+  <body>
+    <%- include('../layout/header') %>
+    <main>
+      <section class="task-view container">
+        <ul id="task-list">
+          <li class="task-item" data-id="<%= task.id %>">
+            <h4>Task: <%= task.title %></h4>
+            <p>Description: <%= task.description %></p>
+            <p>Contact person: <%= task.contact %></p>
+            <p>Completion status: <%= task.status %></p>
+            <p>Category: <%= task.category %></p>
+          </li>
+        </ul>
+
+      </section>
+
+      <form action="/update/<%= task.id %>" method="post">
+
+        <input type='hidden' name="_method" value="put">
+
+        <input type="text" name="title" value="<%- task.title %>" placeholder="Task Name">
+        <textarea name="description" placeholder="Description of the task" cols='30' rows='10'><%= task.description %></textarea>
+        <input type='text' name='category' value='<%-task.contact %>' placeholder="Contact Person">
+        <input type="text" name="status" value="<%- task.status %>" placeholder="Completion Status">
+        <button type="submit">Update this task</button>
+      </form>
+      
+      
+    </main>
+ 
+  </body>
+</html>
