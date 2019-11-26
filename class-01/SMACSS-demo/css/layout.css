@@ -1,26 +1,20 @@
 /* positions, structure, width, height*/
-
-body {
-  width: 450px;
+body{
   margin: auto;
+  width: 500px;
 }
 
-div {
-  border: 2px solid black;
-  height: 200px;
-  margin-top: 10px;
-  width: 358px;
+div{
+  background-color: green;
+  width: 250px;
+  height: 450px;
+  margin: 20px;
+  overflow: scroll;
 }
 
-@media only screen and (min-width: 451px){
-  body {
-    width: 100%;
-  }
-  
-  div {
-    width: 400px;
-    float: left;
-    background-color: pink;
+@media only screen and (min-width:500px){
+  div{
+    display: inline-block;
+    background-color: lightblue;
   }
 }
-

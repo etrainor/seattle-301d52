@@ -1,45 +1,35 @@
-@media (min-width: 960px) {
+@media (min-width:960px){
+    body {
+        display: flex;
+        flex-direction: column;
+    }
 
-  body {
-      display:flex;
-      flex-direction:column;
-  }
+    main {
+        display: flex;
+        flex-direction: row;
+        flex: 1;
+    }
 
-  main {
-      display:flex;
-      flex:1;
-      flex-direction:row;
-  }
+    aside {
+        width: 250px;
+        order: 3;
+    }
 
-  aside {
-      order: 3;
-      width: 250px;
-  }
+    nav {
+        order: 2;
+        width: 250px;
+    }
 
-  nav {
-      order: 2;
-      width: 250px;
-  }
+    .content{
+       display: flex;
+       flex-direction: column;
+       order: 2;
+       flex: 1; 
+    }
 
-  .content {
-      display:flex;
-      flex-direction:column;
-      flex: 1;
-      order: 2;
-  }
-
-  .deck {
-      display:flex;
-      flex-direction:column;
-      flex-wrap:wrap;
-      flex:1;
-      justify-content: space-between;
-  }
-
-  .card {
-      display:flex;
-      flex-direction:column;
-      flex:1;
-  }
-
+    .deck {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+    }
 }

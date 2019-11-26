@@ -2,9 +2,11 @@
 // select all <a> tags that are children of #list
 // when any of them are clicked on, console.log() the text of the <a> tag that was clicked on
 // 'this' refers to the event.target in jQuery
-$( "#list" ).on( "click", 'a', function( event ) {
+$( "#list" ).on( "click", "a", eventHandler)
+
+function eventHandler( event ) {
   console.log( $( this ).text() );
-});
+};
 
 
 

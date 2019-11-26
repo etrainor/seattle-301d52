@@ -1,26 +1,18 @@
-@media(min-width: 701px){
-  main{
-    display: flex;
-  }
+main{
+  display: flex;
+}
 
-  div, header, footer{
-    background-color: #dedede;
-  }
+#left{
+  order: 1;
+  height: 500px;
+}
 
-  div {
-    height: 500px;
-  }
+#main{
+  order: 2;
+  height: 500px;
+}
 
-  /* #left{
-    order: 1;
-  }
-
-  #main{
-    order: 2;
-  } */
-
-  #right{
-    order: 1;
-  }
-
+#right{
+  order: 3;
+  height: 500px;
 }

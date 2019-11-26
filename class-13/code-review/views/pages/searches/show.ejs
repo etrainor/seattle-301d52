@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+
+    <% books.forEach(book => { %>
+      <section>
+        <p><%= book.title %></p>
+        <p><%= book.author %></p>
+        <img src="<%= book.image_url %>" />
+        <p><%= book.description %></p>
+        <a href="/books/<%=book.isbn%>">Show Details</a>
+      </section>
+
+      <section>
+        <form action="/books" method="post">
+          <fieldset>
+            <input name="title" value="<%=book.title%>"/>
+            <input name="author" value="<%=book.author%>"/>
+            <input name="description" value="<%=book.description%>"/>
+            <input name="bookshelf" value="<%=book.bookshelf%>"/>
+            <button>submit</button>
+          </fieldset>
+        </form>
+      </section>
+    <% }) %>
+</body>
+</html>
